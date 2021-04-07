@@ -6,7 +6,7 @@ class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image();
+    this.load.image('bg0', './assets/sprBg0.png');
   }
 
   create() {}
