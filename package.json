@@ -20,6 +20,7 @@
   "homepage": "https://github.com/jdmartinez1062/JS-CapstoneProject#readme",
   "devDependencies": {
     "babel-eslint": "10.1.x",
+    "copy-webpack-plugin": "^8.1.1",
     "eslint": "6.8.x",
     "eslint-config-airbnb-base": "14.1.x",
     "eslint-plugin-import": "2.20.x",

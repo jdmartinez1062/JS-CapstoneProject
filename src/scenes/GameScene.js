@@ -5,9 +5,9 @@ class GameScene extends Phaser.Scene {
     super('game-scene');
   }
 
-  preload() {
-    this.load.image('bg0', './assets/sprBg0.png');
-  }
+  preload() {}
 
   create() {}
 }
+
+export default GameScene;

@@ -1,5 +1,7 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: './src/index.js',
@@ -15,27 +17,19 @@ module.exports = {
         test: /\.css$/i,
         use: ['style-loader', 'css-loader'],
       },
-      // Load Images
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-      },
-      // Load sounds
-      {
-        test: /\.(wav)$/i,
-        include: path.resolve(__dirname, 'src'),
-        use: [
-          {
-            loader: 'file-loader',
-          },
-        ],
-      },
     ],
   },
 
   plugins: [
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'src', 'index.html'),
+    }),
+    new CopyPlugin({
+      patterns: [{ from: 'src/assets', to: 'assets' }],
+    }),
+    new webpack.DefinePlugin({
+      'typeof CANVAS_RENDERER': JSON.stringify(true),
+      'typeof WEBGL_RENDERER': JSON.stringify(true),
     }),
   ],
 
