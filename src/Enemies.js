@@ -5,7 +5,7 @@ class Enemies extends Entities {
   constructor(scene, x, y, enemy) {
     super(scene, x, y, enemy);
     this.play(enemy);
-
+    this.setData('value', 100);
     this.shootTimer = this.scene.time.addEvent({
       delay: 1000,
       callback: () => {

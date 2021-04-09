@@ -92,9 +92,12 @@ class GameScene extends Phaser.Scene {
         if (enemy.onDestroy !== undefined) {
           enemy.onDestroy();
         }
+        if (!enemy.getData('isDead')) {
+          this.player.setData('score', this.player.getData('score') + enemy.getData('value'));
+          playerLaser.destroy();
+        }
 
         enemy.explode(true);
-        playerLaser.destroy();
       }
     });
 
@@ -106,6 +109,7 @@ class GameScene extends Phaser.Scene {
           }
           enemy.explode(true);
           player.explode(false);
+          this.scene.start('MainMenu');
         }
       }
     });
@@ -114,6 +118,7 @@ class GameScene extends Phaser.Scene {
       if (!player.getData('isDead') && !laser.getData('isDead')) {
         player.explode(false);
         laser.destroy();
+        this.scene.start('MainMenu');
       }
     });
 
@@ -121,6 +126,13 @@ class GameScene extends Phaser.Scene {
       explosions: [this.sound.add('SExplode0'), this.sound.add('SExplode1')],
       laser: this.sound.add('SLaser'),
     };
+
+    this.score = this.add
+      .text(100, 15, `Score: ${this.player.getData('score')}`, {
+        color: '#FFFFFF',
+        fontSize: '30px',
+      })
+      .setOrigin(0.5, 0.1);
   }
 
   update() {
@@ -146,9 +158,10 @@ class GameScene extends Phaser.Scene {
         this.player.setData('timerShootTick', this.player.getData('timerShootDelay') - 1);
         this.player.setData('isShooting', false);
       }
+      this.score.setText(`Score: ${this.player.getData('score')}`);
     }
 
-    for (let i = 0; i < this.enemies.getChildren().length; i++) {
+    for (let i = 0; i < this.enemies.getChildren().length; i += 1) {
       this.enemies.getChildren()[i].update();
     }
   }
