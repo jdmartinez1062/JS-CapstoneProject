@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import GameScene from './GameScene';
 
 class PreloadScene extends Phaser.Scene {
   constructor() {

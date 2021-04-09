@@ -5,7 +5,7 @@ class Player extends Entities {
   constructor(scene, x, y, key) {
     super(scene, x, y, key, 'Player');
     this.setData('speed', 200);
-    this.setData('Health', 100);
+    this.setData('health', 100);
     this.play('Player');
   }
 
@@ -27,7 +27,7 @@ class Player extends Entities {
 
   update() {
     this.body.setVelocity(0, 0);
-    this.x = Phaser.Math.Clamp(this.x, this.scene.game.config.width);
+    this.x = Phaser.Math.Clamp(this.x, 0, this.scene.game.config.width);
     this.y = Phaser.Math.Clamp(this.y, 0, this.scene.game.config.height);
   }
 }
