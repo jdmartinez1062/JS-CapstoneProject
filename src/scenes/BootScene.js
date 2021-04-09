@@ -6,7 +6,11 @@ class BootScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('loader-scene', 'asset/galaga.png');
+    this.load.image('background0', './assets/sprBg0.png');
+    this.load.image('background1', './assets/sprBg1.png');
+  }
+
+  create() {
     this.scene.start('Preload');
   }
 }
