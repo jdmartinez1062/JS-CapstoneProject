@@ -65,7 +65,7 @@ class PreloadScene extends Phaser.Scene {
       frameHeight: 16,
     });
 
-    this.load.spritesheet('Explosion', './assets/sprExplosion', {
+    this.load.spritesheet('Explosion', './assets/sprExplosion.png', {
       frameWidth: 32,
       frameHeight: 32,
     });

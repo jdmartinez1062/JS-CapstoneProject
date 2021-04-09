@@ -73,6 +73,13 @@ class GameScene extends Phaser.Scene {
       repeat: -1,
     });
 
+    this.anims.create({
+      key: 'Explosion',
+      frames: this.anims.generateFrameNumbers('Explosion'),
+      frameRate: 20,
+      repeat: 0,
+    });
+
     this.player = new Player(
       this,
       this.game.config.width * 0.5,
@@ -92,10 +99,13 @@ class GameScene extends Phaser.Scene {
     });
 
     this.physics.add.collider(this.player, this.enemies, (player, enemy) => {
-      if (enemy) {
+      if (enemy && player) {
         if (!player.getData('isDead') && !enemy.getData('isDead')) {
-          player.explode(false);
+          if (enemy.onDestroy !== undefined) {
+            enemy.onDestroy();
+          }
           enemy.explode(true);
+          player.explode(false);
         }
       }
     });
@@ -108,19 +118,14 @@ class GameScene extends Phaser.Scene {
     });
 
     this.sfx = {
-      explosions =[
-        this.sound.add("SExplode0"),
-        this.sound.add("SExplode1"),
-        
-      ],
-      laser = this.sound.add('SLaser')
-    }
-   
+      explosions: [this.sound.add('SExplode0'), this.sound.add('SExplode1')],
+      laser: this.sound.add('SLaser'),
+    };
   }
 
   update() {
     bgUpdate(this);
-    if (!this.player.getData('isDead')){
+    if (!this.player.getData('isDead')) {
       this.player.update();
 
       if (this.keyW.isDown) {
@@ -128,13 +133,13 @@ class GameScene extends Phaser.Scene {
       } else if (this.keyS.isDown) {
         this.player.moveDown();
       }
-  
+
       if (this.keyA.isDown) {
         this.player.moveLeft();
       } else if (this.keyD.isDown) {
         this.player.moveRight();
       }
-  
+
       if (this.keySpace.isDown) {
         this.player.setData('isShooting', true);
       } else {

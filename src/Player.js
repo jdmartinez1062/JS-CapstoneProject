@@ -41,7 +41,7 @@ class Player extends Entities {
       } else {
         const laser = new PlayerLaser(this.scene, this.x, this.y);
         this.scene.playerLasers.add(laser);
-
+        this.scene.sfx.laser.play();
         this.setData('timerShootTick', 0);
       }
     }

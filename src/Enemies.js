@@ -7,11 +7,12 @@ class Enemies extends Entities {
     this.play(enemy);
 
     this.shootTimer = this.scene.time.addEvent({
-      delay: 500,
+      delay: 1000,
       callback: () => {
         const laser = new EnemyLaser(this.scene, this.x, this.y);
         laser.setScale(this.scaleX);
         this.scene.enemyLasers.add(laser);
+        this.scene.sfx.laser.play();
       },
       callbackScope: this,
       loop: true,
