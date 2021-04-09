@@ -9,6 +9,29 @@ class Entities extends Phaser.GameObjects.Sprite {
     this.setData('type', type);
     this.setData('isDead', false);
   }
+
+  explode(canDestroy) {
+    if (this.getData('isDead')) {
+      this.setTexture('Explosion');
+      this.play('Explosion');
+
+      this.scene.sfx.explosions[
+        Phaser.Math.Between(0, this.scene.sfx.explosions.length - 1)
+      ].play();
+
+      this.on(
+        'animationcomplete',
+        () => {
+          if (canDestroy) {
+            this.destroy();
+          } else {
+            this.setVisible(false);
+          }
+        },
+        this,
+      );
+    }
+  }
 }
 
 export default Entities;

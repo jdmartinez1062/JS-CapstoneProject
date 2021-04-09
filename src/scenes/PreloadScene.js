@@ -21,14 +21,14 @@ class PreloadScene extends Phaser.Scene {
     const progressBar = this.add.graphics();
     const progressBox = this.add.graphics();
     progressBox.fillStyle(0xb8bcc3, 0.8);
-    progressBox.fillRect(width / 2 - 320 / 2, 270, 320, 50);
+    progressBox.fillRect(this.game.config.width / 2 - 320 / 2, 270, 320, 50);
 
     loadingText.setOrigin(0.5, 0.5);
 
     this.load.on('progress', (value) => {
       progressBar.clear();
       progressBar.fillStyle(0xffffff, 1);
-      progressBar.fillRect(width / 2 - 300 / 2, 280, 300 * value, 30);
+      progressBar.fillRect(this.game.config.width / 2 - 300 / 2, 280, 300 * value, 30);
     });
 
     this.load.on('complete', () => {
@@ -42,8 +42,8 @@ class PreloadScene extends Phaser.Scene {
       frameHeight: 100,
     });
 
-    this.load.image('LaserEnemy0', './assets/sprEnemy1.png');
-    this.load.image('LaserPlayer', './assets/sprLaserPlayer.png');
+    this.load.image('EnemyLaser', './assets/sprLaserEnemy0.png');
+    this.load.image('PlayerLaser', './assets/sprLaserPlayer.png');
 
     this.load.spritesheet('Player', './assets/sprPlayer.png', {
       frameWidth: 16,
@@ -55,9 +55,12 @@ class PreloadScene extends Phaser.Scene {
       frameHeight: 16,
     });
 
-    this.load.image('Enemy1', './assets/sprEnemy1.png');
+    this.load.spritesheet('Enemy1', './assets/sprEnemy1.png', {
+      frameWidth: 16,
+      frameHeight: 16,
+    });
 
-    this.load.spritesheet('Enemy2', './assets/.png', {
+    this.load.spritesheet('Enemy2', './assets/sprEnemy2.png', {
       frameWidth: 16,
       frameHeight: 16,
     });
@@ -67,9 +70,9 @@ class PreloadScene extends Phaser.Scene {
       frameHeight: 32,
     });
 
-    this.load.audio('sndExplode0', './assets/sndExplode0.wav');
-    this.load.audio('sndExplode1', './assets/sndExplode1.wav');
-    this.load.audio('sndLaser', './assets/sndLaser.wav');
+    this.load.audio('SExplode0', './assets/sndExplode0.wav');
+    this.load.audio('SExplode1', './assets/sndExplode1.wav');
+    this.load.audio('SLaser', './assets/sndLaser.wav');
   }
 }
 export default PreloadScene;

@@ -27,7 +27,7 @@ class GameScene extends Phaser.Scene {
     this.playerLasers = this.add.group();
 
     this.time.addEvent({
-      delay: 100,
+      delay: 300,
 
       callback: () => {
         const enemyKey = ['Enemy0A', 'Enemy1A', 'Enemy2A'];
@@ -35,7 +35,7 @@ class GameScene extends Phaser.Scene {
         const enemy = new Enemies(
           this,
           Phaser.Math.Between(0, this.game.config.width),
-          Phaser.Math.Between(0, this.game.config.height) * 0.7,
+          Phaser.Math.Between(0, this.game.config.height) * 0.4,
           actualEnemy,
         );
         this.enemies.add(enemy);
@@ -58,12 +58,14 @@ class GameScene extends Phaser.Scene {
       frameRate: 20,
       repeat: -1,
     });
+
     this.anims.create({
       key: 'Enemy1A',
       frames: this.anims.generateFrameNumbers('Enemy1'),
       frameRate: 20,
       repeat: -1,
     });
+
     this.anims.create({
       key: 'Enemy2A',
       frames: this.anims.generateFrameNumbers('Enemy2'),
@@ -74,9 +76,46 @@ class GameScene extends Phaser.Scene {
     this.player = new Player(
       this,
       this.game.config.width * 0.5,
-      this.game.config.height * 0.5,
+      this.game.config.height * 0.8,
       'Player',
     );
+
+    this.physics.add.collider(this.playerLasers, this.enemies, (playerLaser, enemy) => {
+      if (enemy) {
+        if (enemy.onDestroy !== undefined) {
+          enemy.onDestroy();
+        }
+
+        enemy.explode(true);
+        playerLaser.destroy();
+      }
+    });
+
+    this.physics.add.collider(this.player, this.enemies, (player, enemy) => {
+      if (enemy) {
+        if (!player.getData('isDead') && !enemy.getData('isDead')) {
+          player.explode(false);
+          enemy.explode(true);
+        }
+      }
+    });
+
+    this.physics.add.overlap(this.player, this.enemyLasers, (player, laser) => {
+      if (!player.getData('isDead') && !laser.getData('isDead')) {
+        player.explode(false);
+        laser.destroy();
+      }
+    });
+
+    this.sfx = {
+      explosions =[
+        this.sound.add("SExplode0"),
+        this.sound.add("SExplode1"),
+        
+      ],
+      laser = this.sound.add('SLaser')
+    }
+   
   }
 
   update() {
@@ -93,6 +132,17 @@ class GameScene extends Phaser.Scene {
       this.player.moveLeft();
     } else if (this.keyD.isDown) {
       this.player.moveRight();
+    }
+
+    if (this.keySpace.isDown) {
+      this.player.setData('isShooting', true);
+    } else {
+      this.player.setData('timerShootTick', this.player.getData('timerShootDelay') - 1);
+      this.player.setData('isShooting', false);
+    }
+
+    for (let i = 0; i < this.enemies.getChildren().length; i++) {
+      this.enemies.getChildren()[i].update();
     }
   }
 }
