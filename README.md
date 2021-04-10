@@ -19,10 +19,10 @@
 <p align="center">
   
 
-  <h3 class ="norse" align="center" style="@font-face {font-family: 'Norse'; src: url('/fonts/Norse.otf'); font-family:'Norse'}">ToDo List</h3>
+  <h3 class ="norse" align="center" style="@font-face {font-family: 'Norse'; src: url('/fonts/Norse.otf'); font-family:'Norse'}">Classic Galaga Game</h3>
 
   <p align="center">
-    Small Note Creating app
+    JavaScript Capstone Project
     <br />
     <br />
   </p>
@@ -50,14 +50,14 @@
 
 
 
-This is a project of the Javascript module.
+This the last project of the Javascript module.
 
-Project: JavaScript project, Weather App. [Assignment link](https://www.theodinproject.com/courses/javascript/lessons/JS-CapstoneProject)
+Project: JavaScript Capstone project, Shooter Game. [Assignment link](https://www.notion.so/microverse/Shooter-game-203e819041c7486bb36f9e65faecba27)
 
 
-Visit the finished project website: [Live](https://jdmartinez1062.github.io/JS-CapstoneProject/)
+Visit the finished project website: [Live](https://jdmartinez1062.github.io/JS-CapstoneProject/dist/)
 <div style="text-align:center">
-  <a href="https://jdmartinez1062.github.io/JS-CapstoneProject/">
+  <a href="https://jdmartinez1062.github.io/JS-CapstoneProject/dist/">
       <img src="app.png" width="100%">
   </a>
 </div>
