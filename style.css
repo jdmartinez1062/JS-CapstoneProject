@@ -1,4 +1,4 @@
 /* stub css for linters */
 body {
-  display: visible;
+  box-sizing: border-box;
 }
