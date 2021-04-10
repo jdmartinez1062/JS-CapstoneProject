@@ -65,7 +65,7 @@ Visit the finished project website: [Live](https://jdmartinez1062.github.io/JS-C
 ### Built With
 
 - [JavaScript](https://www.javascript.com)
-- [Wwbpack](https://webpack.js.org/)
+- [Webpack](https://webpack.js.org/)
 - [Phaser](https://phaser.io/phaser3)
 
 ## Getting Started
