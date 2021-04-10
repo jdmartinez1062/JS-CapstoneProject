@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import Enemies from '../Enemies';
 import Player from '../Player';
+import { retrieveScoreH, submitScore } from '../scoreRequests';
 import { scrollBg, bgUpdate } from './scrollingBg';
 
 const customKeys = (scene) => {
@@ -9,14 +10,44 @@ const customKeys = (scene) => {
   scene.keyA = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
   scene.keyD = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
   scene.keySpace = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+  scene.keyEnter = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+};
+
+const gameOver = (scene, player) => {
+  scene.add.text(120, 100, `This game's score: ${scene.player.getData('score')}`, {
+    color: '#FFFFFF',
+    fontSize: '20px',
+  });
+
+  submitScore(scene.player.getData('score'));
+
+  retrieveScoreH(scene)
+    .then((response) => {
+      scene.highestScore.destroy();
+      scene.add.text(40, 200, `The higest all time score is: ${response}`, {
+        color: '#FFFFFF',
+        fontSize: '20px',
+      });
+    })
+    .catch((err) => {
+      scene.add.text(100, 300, `There was an error e: ${err}`, {
+        color: '#DA0000',
+        fontSize: '20px',
+      });
+    });
+
+  scene.add.text(40, 400, 'Press ENTER to go to the Main Menu', {
+    color: '#FFFFFF',
+    fontSize: '20px',
+  });
+
+  player.explode(false);
 };
 
 class GameScene extends Phaser.Scene {
   constructor() {
     super('GameScene');
   }
-
-  preload() {}
 
   create() {
     scrollBg(this);
@@ -107,18 +138,16 @@ class GameScene extends Phaser.Scene {
           if (enemy.onDestroy !== undefined) {
             enemy.onDestroy();
           }
+          gameOver(this, player);
           enemy.explode(true);
-          player.explode(false);
-          this.scene.start('MainMenu');
         }
       }
     });
 
     this.physics.add.overlap(this.player, this.enemyLasers, (player, laser) => {
       if (!player.getData('isDead') && !laser.getData('isDead')) {
-        player.explode(false);
         laser.destroy();
-        this.scene.start('MainMenu');
+        gameOver(this, player);
       }
     });
 
@@ -159,6 +188,12 @@ class GameScene extends Phaser.Scene {
         this.player.setData('isShooting', false);
       }
       this.score.setText(`Score: ${this.player.getData('score')}`);
+    } else if (this.score && this.player.getData('isDead')) {
+      this.score.destroy();
+      this.keyEnter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
+      if (this.keyEnter.isDown) {
+        this.scene.start('MainMenu');
+      }
     }
 
     for (let i = 0; i < this.enemies.getChildren().length; i += 1) {
