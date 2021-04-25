@@ -1,0 +1,45 @@
+{
+	"textures": [
+		{
+			"image": "Spaceshipkit.png",
+			"format": "RGBA8888",
+			"size": {
+				"w": 578,
+				"h": 322
+			},
+			"scale": 1,
+			"frames": [
+				{
+					"filename": "SpaceshipKit.png",
+					"rotated": false,
+					"trimmed": false,
+					"sourceSize": {
+						"w": 576,
+						"h": 320
+					},
+					"spriteSourceSize": {
+						"x": 0,
+						"y": 0,
+						"w": 576,
+						"h": 320
+					},
+					"frame": {
+						"x": 1,
+						"y": 1,
+						"w": 576,
+						"h": 320
+					},
+					"anchor": {
+						"x": 0.5,
+						"y": 0.5
+					}
+				}
+			]
+		}
+	],
+	"meta": {
+		"app": "https://www.codeandweb.com/texturepacker",
+		"version": "3.0",
+		"smartupdate": "$TexturePacker:SmartUpdate:ee1d0320c2184a182c2d665e47226701:83151cd93188fe9d7a26e73eec1e3421:02ab132358d6d8b512e80119463a8329$"
+	}
+}

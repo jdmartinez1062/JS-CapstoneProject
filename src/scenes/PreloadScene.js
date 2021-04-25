@@ -45,10 +45,17 @@ class PreloadScene extends Phaser.Scene {
     this.load.image('EnemyLaser', './assets/sprLaserEnemy0.png');
     this.load.image('PlayerLaser', './assets/sprLaserPlayer.png');
 
-    this.load.spritesheet('Player', './assets/sprPlayer.png', {
-      frameWidth: 16,
-      frameHeight: 16,
+    // this.load.spritesheet('Player', './assets/sprPlayer.png', {
+    //   frameWidth: 16,
+    //   frameHeight: 16,
+    // });
+
+    this.load.spritesheet('Player', './assets/SpaceshipKit-104.png', {
+      frameWidth: 32,
+      frameHeight: 32,
     });
+
+    this.load.atlas('Player', './assets/SpaceshipKit.png', './assets/SpaceshipKit.json');
 
     this.load.spritesheet('Enemy0', './assets/sprEnemy0.png', {
       frameWidth: 16,
