@@ -1,7 +1,7 @@
 const gameID = 'C1Ke6YljNQHKfzYxq70e';
 const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameID}/scores`;
 
-const submitScore = async (score, scene) => {
+const submitScore = async (player, score, scene) => {
   const data = {
     user: 'Global',
     score,

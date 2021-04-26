@@ -1,11 +1,7 @@
-import { Scene } from 'phaser';
-import Player from '../Player';
-import TestScene from './__mocks__/testScene';
+import PlayerMock from './__mocks__/PlayerMock';
 
 describe('Test Player object creation', () => {
-  const testScene = new Scene('testing');
-
-  const newPlayer = new Player(testScene, 100, 100, 'Player');
+  const newPlayer = new PlayerMock('TestScene', 1, 1, 'Player');
 
   test('Expect newPlayer to be an Object', () => {
     expect(typeof newPlayer).toBe('object');
@@ -14,19 +10,15 @@ describe('Test Player object creation', () => {
     expect(!newPlayer.scene).toBe(false);
   });
   test('x attribute exists', () => {
-    expect(!newPlayer.x).toBe(false);
+    expect(newPlayer.x != null).toBe(true);
   });
   test('y attribute exists', () => {
-    expect(!newPlayer.y).toBe(false);
+    expect(newPlayer.y != null).toBe(true);
   });
   test('key attribute exists', () => {
     expect(!newPlayer.key).toBe(false);
   });
   test('scene attribute exists', () => {
     expect(!newPlayer.scene).toBe(false);
-  });
-
-  test('Player isShooting data is False', () => {
-    expect(newPlayer.getData('isShooting')).toBe(false);
   });
 });
