@@ -4,7 +4,12 @@ class TestScene extends Phaser.Scene {
   constructor() {
     super('TestScene');
   }
-  preload() {}
+  preload() {
+    testScene.load.spritesheet('Player', './assets/SpaceshipKit-104.png', {
+      frameWidth: 32,
+      frameHeight: 32,
+    });
+  }
 
   create() {}
 }

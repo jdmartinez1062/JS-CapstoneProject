@@ -1,13 +1,9 @@
 import { Scene } from 'phaser';
 import Player from '../Player';
+import TestScene from './__mocks__/testScene';
 
 describe('Test Player object creation', () => {
   const testScene = new Scene('testing');
-
-  testScene.load.spritesheet('Player', './assets/SpaceshipKit-104.png', {
-    frameWidth: 32,
-    frameHeight: 32,
-  });
 
   const newPlayer = new Player(testScene, 100, 100, 'Player');
 
