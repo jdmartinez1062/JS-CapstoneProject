@@ -1,7 +1,9 @@
-import PlayerMock from './__mocks__/PlayerMock';
+import Player from '../Player';
+
+jest.mock('../Player');
 
 describe('Test Player object creation', () => {
-  const newPlayer = new PlayerMock('TestScene', 1, 1, 'Player');
+  const newPlayer = new Player('TestScene', 1, 1, 'Player');
 
   test('Expect newPlayer to be an Object', () => {
     expect(typeof newPlayer).toBe('object');

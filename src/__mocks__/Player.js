@@ -1,4 +1,4 @@
-class PlayerMock {
+class Player {
   constructor(scene, x, y, key) {
     this.scene = scene;
     this.x = x;
@@ -7,4 +7,4 @@ class PlayerMock {
   }
 }
 
-export default PlayerMock;
+export default Player;
