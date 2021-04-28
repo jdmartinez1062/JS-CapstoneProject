@@ -1,3 +1,5 @@
+import fetch from 'node-fetch';
+
 const gameID = 'C1Ke6YljNQHKfzYxq70e';
 const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/games/${gameID}/scores`;
 
@@ -68,11 +70,10 @@ const retrieveTopScores = async () => {
   try {
     const json = await send.json();
 
-    topPlayers = json.sort((a, b) => {
-      return a.score - b.score;
-    });
-    console.log(topPlayers);
-  } catch (error) {}
+    topPlayers = await json.result.sort((a, b) => b.score - a.score);
+  } catch (error) {
+    Error('Bad Request');
+  }
   return topPlayers;
 };
 

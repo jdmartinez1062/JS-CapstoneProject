@@ -36,7 +36,7 @@ class GameOverScene extends Phaser.Scene {
         this,
       );
       this.buttons.buttonArr[i].on('pointerdown', () => {
-        if (i == 0) {
+        if (i === 0) {
           this.scene.start('LeaderBoardScene');
         } else {
           this.scene.start('MainMenu');

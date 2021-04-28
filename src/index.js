@@ -5,6 +5,7 @@ import PreloadScene from './scenes/PreloadScene';
 import MainMenuScene from './scenes/MainMenuScene';
 import GameScene from './scenes/GameScene';
 import GameOverScene from './scenes/GameOverScene';
+import LeaderBoardScene from './scenes/LeaderBoardScene';
 
 const config = {
   type: Phaser.AUTO,
@@ -19,7 +20,7 @@ const config = {
   dom: {
     createContainer: true,
   },
-  scene: [BootScene, PreloadScene, MainMenuScene, GameScene, GameOverScene],
+  scene: [BootScene, PreloadScene, MainMenuScene, GameScene, GameOverScene, LeaderBoardScene],
   // pixelArt: true,
   // roundPixels: true,
 };

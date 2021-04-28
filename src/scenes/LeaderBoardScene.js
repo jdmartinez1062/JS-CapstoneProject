@@ -7,6 +7,8 @@ class LeaderBoardScene extends Phaser.Scene {
   }
 
   create() {
-    retrieveTopScores();
+    console.log(retrieveTopScores());
   }
 }
+
+export default LeaderBoardScene;
