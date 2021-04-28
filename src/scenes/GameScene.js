@@ -199,7 +199,7 @@ class GameScene extends Phaser.Scene {
       this.score.destroy();
       this.keyEnter = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
       if (this.keyEnter.isDown) {
-        this.scene.start('MainMenu');
+        this.scene.start('GameOverScene');
       }
     }
 

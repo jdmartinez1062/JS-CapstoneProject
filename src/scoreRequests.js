@@ -58,4 +58,22 @@ const retrieveScoreH = async (scene) => {
   return { name: bestPlayer, score: highest };
 };
 
-export { submitScore, retrieveScoreH };
+const retrieveTopScores = async () => {
+  const payload = {
+    method: 'GET',
+    mode: 'cors',
+  };
+  const send = await fetch(url, payload);
+  let topPlayers;
+  try {
+    const json = await send.json();
+
+    topPlayers = json.sort((a, b) => {
+      return a.score - b.score;
+    });
+    console.log(topPlayers);
+  } catch (error) {}
+  return topPlayers;
+};
+
+export { submitScore, retrieveScoreH, retrieveTopScores };
