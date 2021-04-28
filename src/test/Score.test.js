@@ -1,4 +1,4 @@
-import { submitScore, retrieveScoreH } from '../scoreRequests';
+import { submitScore, retrieveScoreH, retrieveTopScores } from '../scoreRequests';
 
 jest.mock('../scoreRequests');
 
@@ -33,13 +33,29 @@ describe('Test scoring system', () => {
     retrieveScoreH().then((response) => {
       newHighest = response;
       oldHighest = newHighest;
+      submitScore('HighestScore', newHighest + 1);
+
+      retrieveScoreH().then((response) => {
+        newHighest = response;
+        expect(newHighest).toBe(oldHighest + 1);
+      });
     });
+  });
 
-    submitScore('HighestScore', newHighest + 1);
+  test('Retrieves 10 top scores', () => {
+    let newTop10;
 
-    retrieveScoreH().then((response) => {
-      newHighest = response;
-      expect(newHighest).toBe(oldHighest + 1);
+    let oldTop10;
+
+    retrieveTopScores().then((response) => {
+      oldTop10 = response;
+      submitScore('HighestScore', oldTop10[0].score + 1);
+      submitScore('10Score', oldTop10[9].score + 1);
+      retrieveTopScores().then((response) => {
+        newTop10 = response;
+        expect(newTop10[0].user).toBe('HighestScore');
+        expect(newTop10[9].user).toBe('10Score');
+      });
     });
   });
 });

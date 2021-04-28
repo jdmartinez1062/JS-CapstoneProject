@@ -53,4 +53,20 @@ const retrieveScoreH = async () => {
   return highest;
 };
 
-export { submitScore, retrieveScoreH };
+const retrieveTopScores = async () => {
+  const payload = {
+    method: 'GET',
+    mode: 'cors',
+  };
+  const send = await fetch(url, payload);
+  let topPlayers;
+  try {
+    const json = await send.json();
+
+    topPlayers = await json.result.sort((a, b) => b.score - a.score);
+  } catch (error) {
+    Error('Bad Request');
+  }
+  return topPlayers;
+};
+export { submitScore, retrieveScoreH, retrieveTopScores };
