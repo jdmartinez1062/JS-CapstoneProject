@@ -18,16 +18,22 @@ const gameOver = (scene, player) => {
     color: '#FFFFFF',
     fontSize: '20px',
   });
-
-  submitScore(scene.player.getData('score'));
+  submitScore(localStorage.getItem('PlayerName'), scene.player.getData('score'), this);
 
   retrieveScoreH(scene)
     .then((response) => {
       scene.highestScore.destroy();
-      scene.add.text(40, 200, `The higest all time score is: ${response}`, {
-        color: '#FFFFFF',
-        fontSize: '20px',
-      });
+      scene.add.text(
+        40,
+        200,
+        `The higest all time score is: ${response.score} by ${response.name}`,
+        {
+          color: '#FFFFFF',
+          fontSize: '20px',
+          align: 'center',
+          wordWrap: { width: 450, useAdvancedWrap: true },
+        },
+      );
     })
     .catch((err) => {
       scene.add.text(100, 300, `There was an error e: ${err}`, {
@@ -50,9 +56,10 @@ class GameScene extends Phaser.Scene {
   }
 
   create() {
+    const inputName = document.getElementById('name');
+    inputName.remove();
     scrollBg(this);
     customKeys(this);
-
     this.enemies = this.add.group();
     this.enemyLasers = this.add.group();
     this.playerLasers = this.add.group();

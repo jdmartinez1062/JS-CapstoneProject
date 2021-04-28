@@ -9,9 +9,25 @@ class MainMenuScene extends Phaser.Scene {
   }
 
   create() {
+    this.input.keyboard.clearCaptures();
+
     this.input.on('space', () => {
       this.scene.start('GameScene');
     });
+
+    const inputAlert = this.add
+      .text(this.game.config.width * 0.5, this.game.config.height * 0.85 - 100, 'Input your name', {
+        color: '#FFFFFF',
+        fontSize: '20px',
+      })
+      .setOrigin(0.5, 0.1);
+
+    const nameInput = document.createElement('input');
+    nameInput.id = 'name';
+    nameInput.placeholder = 'Player Name';
+    const body = document.getElementsByTagName('body')[0];
+
+    body.append(nameInput);
 
     this.add
       .text(this.game.config.width * 0.5, this.game.config.height * 0.5 - 100, 'Galaga', {
@@ -46,11 +62,22 @@ class MainMenuScene extends Phaser.Scene {
       },
       this,
     );
-
     this.playButton.on(
       'pointerdown',
       () => {
-        this.scene.start('GameScene');
+        if (nameInput.value !== '') {
+          localStorage.setItem('PlayerName', nameInput.value);
+          this.scene.start('GameScene');
+          nameInput.value = '';
+        } else {
+          this.tweens.add({
+            targets: inputAlert,
+            alpha: 0.2,
+            duration: 250,
+            ease: 'Power3',
+            yoyo: true,
+          });
+        }
       },
       this,
     );

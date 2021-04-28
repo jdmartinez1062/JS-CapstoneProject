@@ -1,0 +1,22 @@
+/* stub css for linters */
+body {
+  box-sizing: border-box;
+  position: relative;
+}
+
+input {
+  border-style: none;
+  background-color: transparent;
+  z-index: 1;
+  position: absolute;
+  top: calc(640 * 0.75px);
+  left: calc(480 * 0.5px);
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+}
+
+.hide {
+  display: none;
+}

@@ -3,7 +3,7 @@ const url = `https://us-central1-js-capstone-backend.cloudfunctions.net/api/game
 
 const submitScore = async (player, score, scene) => {
   const data = {
-    user: 'Global',
+    user: `${player}`,
     score,
   };
 
@@ -32,16 +32,18 @@ const retrieveScoreH = async (scene) => {
   };
   const send = await fetch(url, payload);
   let highest = 0;
+  let bestPlayer;
   try {
     const json = await send.json();
     for (let i = 0; i < json.result.length; i += 1) {
       if (json.result[i].score > highest) {
         highest = json.result[i].score;
+        bestPlayer = json.result[i].user;
       }
     }
 
     scene.highestScore = scene.add
-      .text(150, 15, `Highest Score: ${highest}`, {
+      .text(200, 15, `Highest Score: ${bestPlayer} ${highest}`, {
         color: '#FFFFFF',
         fontSize: '20px',
       })
@@ -53,7 +55,7 @@ const retrieveScoreH = async (scene) => {
     });
   }
 
-  return highest;
+  return { name: bestPlayer, score: highest };
 };
 
 export { submitScore, retrieveScoreH };

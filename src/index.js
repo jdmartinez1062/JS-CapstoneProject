@@ -1,5 +1,5 @@
 import Phaser from 'phaser';
-
+import './style.css';
 import BootScene from './scenes/BootScene';
 import PreloadScene from './scenes/PreloadScene';
 import MainMenuScene from './scenes/MainMenuScene';
@@ -14,6 +14,9 @@ const config = {
     arcade: {
       gravity: { x: 0, y: 0 },
     },
+  },
+  dom: {
+    createContainer: true,
   },
   scene: [BootScene, PreloadScene, MainMenuScene, GameScene],
   // pixelArt: true,
