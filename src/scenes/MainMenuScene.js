@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { retrieveScoreH } from '../scoreRequests';
+import { buttonsCreate } from './SceneHelpers';
 
 import { scrollBg, bgUpdate } from './scrollingBg';
 
@@ -38,30 +39,41 @@ class MainMenuScene extends Phaser.Scene {
 
     retrieveScoreH(this);
 
-    this.playButton = this.add.sprite(
-      this.game.config.width * 0.5,
-      this.game.config.height * 0.5,
-      'MainButton',
-      3,
-    );
+    // this.playButton = this.add.sprite(
+    //   this.game.config.width * 0.5,
+    //   this.game.config.height * 0.5,
+    //   'MainButton',
+    //   3,
+    // );
 
-    this.playButton.setInteractive();
+    // this.playButton.setInteractive();
 
-    this.playButton.on(
-      'pointerover',
-      () => {
-        this.playButton.setTexture('MainButton', 4);
-      },
-      this,
-    );
+    // this.playButton.on(
+    //   'pointerover',
+    //   () => {
+    //     this.playButton.setTexture('MainButton', 4);
+    //   },
+    //   this,
+    // );
 
-    this.playButton.on(
-      'pointerout',
-      () => {
-        this.playButton.setTexture('MainButton', 3);
-      },
-      this,
-    );
+    // this.playButton.on(
+    //   'pointerout',
+    //   () => {
+    //     this.playButton.setTexture('MainButton', 3);
+    //   },
+    //   this,
+    // );
+
+    this.buttons = buttonsCreate(0.5, ['Play', 'Leader Board'], this, [
+      'GameScene',
+      'LeaderBoardScene',
+    ]);
+
+    this.playButton = this.add.sprite();
+
+    this.playButton = this.buttons[0];
+
+    this.playButton.removeListener('pointerdown');
     this.playButton.on(
       'pointerdown',
       () => {
@@ -81,15 +93,14 @@ class MainMenuScene extends Phaser.Scene {
       },
       this,
     );
-
     scrollBg(this);
 
-    this.add
-      .text(this.game.config.width * 0.5, this.game.config.height * 0.5 - 14, 'Play', {
-        color: '#FFFFFF',
-        fontSize: '30px',
-      })
-      .setOrigin(0.5, 0.1);
+    // this.add
+    //   .text(this.game.config.width * 0.5, this.game.config.height * 0.5 - 14, 'Play', {
+    //     color: '#FFFFFF',
+    //     fontSize: '30px',
+    //   })
+    //   .setOrigin(0.5, 0.1);
   }
 
   update() {

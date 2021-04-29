@@ -69,7 +69,6 @@ const retrieveTopScores = async () => {
   let topPlayers;
   try {
     const json = await send.json();
-
     topPlayers = await json.result.sort((a, b) => b.score - a.score);
   } catch (error) {
     Error('Bad Request');

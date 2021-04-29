@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import { buttonsCreate } from './SceneHelpers';
 
 class GameOverScene extends Phaser.Scene {
   constructor() {
@@ -8,55 +9,7 @@ class GameOverScene extends Phaser.Scene {
   create() {
     const xCenter = this.game.config.width * 0.5;
 
-    this.leaderBoard = this.add.sprite(xCenter, this.game.config.height * 0.8, 'MainButton', 3);
-
-    this.continueButton = this.add.sprite(xCenter, this.game.config.height * 0.9, 'MainButton', 3);
-
-    this.leaderBoard.setInteractive();
-    this.continueButton.setInteractive();
-
-    this.buttons = {
-      buttonArr: [this.leaderBoard, this.continueButton],
-    };
-
-    for (let i = 0; i < this.buttons.buttonArr.length; i += 1) {
-      this.buttons.buttonArr[i].on(
-        'pointerover',
-        () => {
-          this.buttons.buttonArr[i].setTexture('MainButton', 4);
-        },
-        this,
-      );
-
-      this.buttons.buttonArr[i].on(
-        'pointerout',
-        () => {
-          this.buttons.buttonArr[i].setTexture('MainButton', 3);
-        },
-        this,
-      );
-      this.buttons.buttonArr[i].on('pointerdown', () => {
-        if (i === 0) {
-          this.scene.start('LeaderBoardScene');
-        } else {
-          this.scene.start('MainMenu');
-        }
-      });
-    }
-
-    this.add
-      .text(xCenter, this.game.config.height * 0.8, 'Leader Board', {
-        color: '#FFFFFF',
-        fontSize: '25px',
-      })
-      .setOrigin(0.5);
-
-    this.add
-      .text(xCenter, this.game.config.height * 0.9, 'Continue', {
-        color: '#FFFFFF',
-        fontSize: '25px',
-      })
-      .setOrigin(0.5);
+    buttonsCreate(0.8, ['Leader Board', 'Continue'], this, ['LeaderBoardScene', 'MainMenu']);
 
     this.add
       .text(xCenter, 100, 'Credits', {

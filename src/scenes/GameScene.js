@@ -1,54 +1,8 @@
 import Phaser from 'phaser';
 import Enemies from '../Enemies';
 import Player from '../Player';
-import { retrieveScoreH, submitScore } from '../scoreRequests';
 import { scrollBg, bgUpdate } from './scrollingBg';
-
-const customKeys = (scene) => {
-  scene.keyW = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
-  scene.keyS = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
-  scene.keyA = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
-  scene.keyD = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-  scene.keySpace = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
-  scene.keyEnter = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
-};
-
-const gameOver = (scene, player) => {
-  scene.add.text(120, 100, `This game's score: ${scene.player.getData('score')}`, {
-    color: '#FFFFFF',
-    fontSize: '20px',
-  });
-  submitScore(localStorage.getItem('PlayerName'), scene.player.getData('score'), this);
-
-  retrieveScoreH(scene)
-    .then((response) => {
-      scene.highestScore.destroy();
-      scene.add.text(
-        40,
-        200,
-        `The higest all time score is: ${response.score} by ${response.name}`,
-        {
-          color: '#FFFFFF',
-          fontSize: '20px',
-          align: 'center',
-          wordWrap: { width: 450, useAdvancedWrap: true },
-        },
-      );
-    })
-    .catch((err) => {
-      scene.add.text(100, 300, `There was an error e: ${err}`, {
-        color: '#DA0000',
-        fontSize: '20px',
-      });
-    });
-
-  scene.add.text(40, 400, 'Press ENTER to go to the Main Menu', {
-    color: '#FFFFFF',
-    fontSize: '20px',
-  });
-
-  player.explode(false);
-};
+import { gameOver, customKeys } from './SceneHelpers';
 
 class GameScene extends Phaser.Scene {
   constructor() {
