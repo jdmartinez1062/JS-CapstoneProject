@@ -20,3 +20,35 @@ input {
 .hide {
   display: none;
 }
+
+#leaderboard {
+  display: flex;
+  flex-direction: column;
+  border-style: none;
+  background-color: transparent;
+  z-index: 1;
+  position: absolute;
+  top: calc(640 * 0.14px);
+  left: calc(480 * 0.5px);
+  width: 450px;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: 20px;
+  text-align: center;
+  height: 440px;
+  overflow-y: scroll;
+}
+
+#leaderboard > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#leaderboard > div > p {
+  margin: 10px 0;
+}
+
+#leaderboard > div > p:nth-child(2) {
+  padding-left: 50px;
+}

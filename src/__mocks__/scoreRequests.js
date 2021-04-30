@@ -20,7 +20,9 @@ const submitScore = async (player, score) => {
   };
 
   try {
-    value = await fetch(url, payload);
+    if (score > 0) {
+      value = await fetch(url, payload);
+    }
   } catch (error) {
     Error(`There was an error Submission: ${error}`);
   }

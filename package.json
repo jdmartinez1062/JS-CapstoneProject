@@ -31,7 +31,6 @@
     "html-webpack-plugin": "^5.3.1",
     "jest": "^26.6.3",
     "jest-canvas-mock": "^2.3.1",
-    "node-fetch": "^2.6.1",
     "style-loader": "^2.0.0",
     "stylelint": "13.3.x",
     "stylelint-config-standard": "20.0.x",
@@ -42,7 +41,8 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "phaser": "^3.54.0"
+    "phaser": "^3.54.0",
+    "node-fetch": "^2.6.1"
   },
   "jest": {
     "setupFiles": [

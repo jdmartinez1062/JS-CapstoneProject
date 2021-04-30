@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import { retrieveTopScores } from '../scoreRequests';
+import { buttonsCreate } from './SceneHelpers';
 
 class LeaderBoardScene extends Phaser.Scene {
   constructor() {
@@ -15,8 +16,11 @@ class LeaderBoardScene extends Phaser.Scene {
       inputName.remove();
     }
 
+    const leaderBoardDiv = document.createElement('div');
+    leaderBoardDiv.id = 'leaderboard';
+
     this.add
-      .text(xCenter, 15, 'Leader Board', {
+      .text(xCenter, 30, 'Leader Board', {
         color: '#FFFFFF',
         fontSize: '30px',
       })
@@ -25,15 +29,22 @@ class LeaderBoardScene extends Phaser.Scene {
     retrieveTopScores().then((response) => {
       topScores = response;
 
-      for (let i = 0; i < 10; i += 1) {
-        this.add
-          .text(xCenter, 100 + i * 30, `${topScores[i].user}      ${topScores[i].score}`, {
-            color: '#FFFFFF',
-            fontSize: '20px',
-          })
-          .setOrigin(0.5);
+      for (let i = 0; i < topScores.length; i += 1) {
+        const holder = document.createElement('div');
+        const name = document.createElement('p');
+        const score = document.createElement('p');
+
+        holder.append(name, score);
+
+        name.textContent = topScores[i].user;
+        score.textContent = topScores[i].score;
+
+        leaderBoardDiv.append(holder);
       }
+
+      document.getElementById('main').append(leaderBoardDiv);
     });
+    buttonsCreate(0.9, ['Main Menu'], this, ['MainMenu']);
   }
 }
 

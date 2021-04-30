@@ -10,6 +10,11 @@ class MainMenuScene extends Phaser.Scene {
   }
 
   create() {
+    const leaderBoardDiv = document.getElementById('leaderboard');
+
+    if (leaderBoardDiv) {
+      leaderBoardDiv.remove();
+    }
     this.input.keyboard.clearCaptures();
 
     this.input.on('space', () => {
@@ -39,31 +44,6 @@ class MainMenuScene extends Phaser.Scene {
 
     retrieveScoreH(this);
 
-    // this.playButton = this.add.sprite(
-    //   this.game.config.width * 0.5,
-    //   this.game.config.height * 0.5,
-    //   'MainButton',
-    //   3,
-    // );
-
-    // this.playButton.setInteractive();
-
-    // this.playButton.on(
-    //   'pointerover',
-    //   () => {
-    //     this.playButton.setTexture('MainButton', 4);
-    //   },
-    //   this,
-    // );
-
-    // this.playButton.on(
-    //   'pointerout',
-    //   () => {
-    //     this.playButton.setTexture('MainButton', 3);
-    //   },
-    //   this,
-    // );
-
     this.buttons = buttonsCreate(0.5, ['Play', 'Leader Board'], this, [
       'GameScene',
       'LeaderBoardScene',
@@ -71,10 +51,8 @@ class MainMenuScene extends Phaser.Scene {
 
     this.playButton = this.add.sprite();
 
-    this.playButton = this.buttons[0];
-
-    this.playButton.removeListener('pointerdown');
-    this.playButton.on(
+    this.buttons[0].removeListener('pointerdown');
+    this.buttons[0].on(
       'pointerdown',
       () => {
         if (nameInput.value !== '') {
@@ -94,13 +72,6 @@ class MainMenuScene extends Phaser.Scene {
       this,
     );
     scrollBg(this);
-
-    // this.add
-    //   .text(this.game.config.width * 0.5, this.game.config.height * 0.5 - 14, 'Play', {
-    //     color: '#FFFFFF',
-    //     fontSize: '30px',
-    //   })
-    //   .setOrigin(0.5, 0.1);
   }
 
   update() {
