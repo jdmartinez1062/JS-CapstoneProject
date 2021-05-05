@@ -6,7 +6,8 @@
   "scripts": {
     "start": "npx webpack --watch",
     "build": "npx webpack --config webpack.config.js",
-    "server": "npx webpack serve"
+    "server": "npx webpack serve",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -19,8 +20,33 @@
   },
   "homepage": "https://github.com/jdmartinez1062/JS-CapstoneProject#readme",
   "devDependencies": {
+    "@babel/plugin-transform-modules-commonjs": "^7.12.13",
+    "@testing-library/jest-dom": "^5.11.9",
+    "babel-eslint": "10.1.x",
+    "copy-webpack-plugin": "^8.1.1",
+    "css-loader": "^5.2.4",
+    "eslint": "6.8.x",
+    "eslint-config-airbnb-base": "14.1.x",
+    "eslint-plugin-import": "2.20.x",
+    "html-webpack-plugin": "^5.3.1",
+    "jest": "^26.6.3",
+    "jest-canvas-mock": "^2.3.1",
+    "style-loader": "^2.0.0",
+    "stylelint": "13.3.x",
+    "stylelint-config-standard": "20.0.x",
+    "stylelint-csstree-validator": "^1.9.0",
+    "stylelint-scss": "3.17.x",
     "webpack": "^5.31.0",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "phaser": "^3.54.0",
+    "node-fetch": "^2.6.1"
+  },
+  "jest": {
+    "setupFiles": [
+      "jest-canvas-mock"
+    ]
   }
 }
