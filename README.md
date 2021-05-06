@@ -58,7 +58,7 @@ Project: JavaScript Capstone project, Shooter Game. [Assignment link](https://ww
 Visit the finished project website: [Live](https://jdmartinez1062.github.io/JS-CapstoneProject/dist/)
 <div style="text-align:center">
   <a href="https://jdmartinez1062.github.io/JS-CapstoneProject/dist/">
-      <img src="App.png" width="100%">
+      <img src="app.png" width="100%">
   </a>
 </div>
 
